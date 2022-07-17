@@ -5,16 +5,16 @@ function getComputerChoice() {
 }
 
 function updateResults(winningChoice, losingChoice, winner) { 
-    const result = document.querySelector('.result')
-    const winnerDiv = document.querySelector('.winner')
-
-    result.textContent = `${winningChoice} beats ${losingChoice}!`;
+    const computerChoiceDiv = document.querySelector('.computer-choice')
+    const humanChoiceDiv = document.querySelector('.player-choice')
 
     if (winner == 'Computer') {
         const scoreUpdate = document.querySelector('.computer-score');
         const currentScore = parseInt(scoreUpdate.textContent) + 1
         scoreUpdate.textContent = currentScore
-        winnerDiv.textContent = `${winner} beats Human!`;
+
+        computerChoiceDiv.textContent = winningChoice
+        humanChoiceDiv.textContent = losingChoice
 
         checkForWin(currentScore, "Computer")
 
@@ -22,7 +22,9 @@ function updateResults(winningChoice, losingChoice, winner) {
         const scoreUpdate = document.querySelector('.player-score');
         const currentScore = parseInt(scoreUpdate.textContent) + 1
         scoreUpdate.textContent = currentScore
-        winnerDiv.textContent = `${winner} beats Computer!`;
+
+        computerChoiceDiv.textContent = winningChoice
+        humanChoiceDiv.textContent = losingChoice
 
         checkForWin(currentScore, "Player")
     }
@@ -36,6 +38,9 @@ function checkForWin(numWins, player) {
         const endgameMsg = document.querySelector('.endgame-msg');
         endgameMsg.textContent = 'Computer Wins';
 
+        const container = document.querySelector('.container')
+        container.classList.add('active')
+
         const modal = document.querySelector('.modal');
         modal.classList.add("active");
 
@@ -43,17 +48,30 @@ function checkForWin(numWins, player) {
         const endgameMsg = document.querySelector('.endgame-msg');
         endgameMsg.textContent = 'Player Wins';
 
+        const container = document.querySelector('.container')
+        container.classList.add('active')
+
         const modal = document.querySelector('.modal');
         modal.classList.add("active");
     }
 }
 
+
+
 function handleButtonClick(e) {
+  
     const computerChoice = getComputerChoice();
     const humanChoice = e.target.id;
 
+    const computerChoiceDiv = document.querySelector('.computer-choice')
+    const humanChoiceDiv = document.querySelector('.player-choice')
+
+    e.stopPropagation()
+    
+
     if (computerChoice === humanChoice) {
-        console.log('Tie')
+        computerChoiceDiv.textContent = `TIE (${computerChoice})`
+        humanChoiceDiv.textContent = `TIE (${humanChoice})`
     }
 
     switch (humanChoice) {
@@ -90,14 +108,17 @@ function resetGame() {
     const computerScore = document.querySelector('.computer-score');
     computerScore.textContent = 0;
 
-    const result = document.querySelector('.result');
-    result.textContent = "Choose Below"
+    const playerChoiceDiv = document.querySelector('.player-choice');
+    playerChoiceDiv.textContent = null
 
-    const winnerDiv = document.querySelector('.winner');
-    winnerDiv.textContent = "First to 5 Wins"
+    const computerChoiceDiv = document.querySelector('.computer-choice');
+    computerChoiceDiv.textContent = null
 
     const modal = document.querySelector('.modal.active');
     modal.classList.remove('active');
+
+    const container = document.querySelector('.container.active')
+    container.classList.remove('active')
 }
 
 buttons = document.querySelectorAll('.btn')
@@ -105,5 +126,8 @@ buttons.forEach(btn => {
     btn.addEventListener('click', handleButtonClick);
   });
 
+
 resetButton = document.querySelector('.reset-btn');
 resetButton.addEventListener('click', resetGame)
+
+

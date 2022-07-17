@@ -14,6 +14,17 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     margin-bottom: 100px;
+    font-family: 'Raleway', sans-serif;
+    font-size:20px;
+}
+
+.header {
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0px;
+    font-size: 40px;
+    background-color: var(--header);
 }
 
 .container {
@@ -21,6 +32,16 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    margin-top: 50px;
+}
+
+.container.active {
+    filter: blur(4px)
+}
+
+.status {
+    display: flex;
+    gap: 50px;
 }
 
 .scoreboard {
@@ -30,11 +51,29 @@ body {
     max-width: 400px;
     padding: 10px;
     margin: 0 auto;
-    gap: 30px;
+    gap: 100px;
 }
 
-.div {
+.buttons {
+    display: flex;
+    gap: 15px;
+    
+}
+
+.btn-img {
+    font-size: 100px;
+}
+
+.btn {
+    height: 200px;
+    width: 200px;
+    background-color: var(--secondary-dark);
+    border-radius: 10px;
+}
+
+div {
     text-align: center;
+    font-weight: 700;
 }
 
 .modal {
@@ -42,8 +81,9 @@ body {
     z-index: 1;
     top: 20%;
     left: 50%;
-    width: 600px;
-    padding: 30px;
+    width: 250px;
+    height: 250px;
+    border: 2px solid;
     border-radius: 10px;
     background-color: var(--primary-dark);
     text-align: center;
@@ -58,3 +98,6 @@ body {
     transform: translate(-50%, -50%) scale(1);
 }
 
+.computer-scoreboard, .player-scoreboard {
+    font-size: 100px;
+}
